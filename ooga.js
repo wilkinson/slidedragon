@@ -24,9 +24,62 @@
 
  // Declarations
 
-    var show_urls, transform, viewer;
+    var first_row_urls, show_urls, transform, viewer;
 
  // Definitions
+
+    first_row_urls  = function () {
+     // This function needs documentation.
+        var config, i, n, x;
+        config = {
+            base: viewer.source.tilesUrl,
+            cols: Math.ceil(viewer.source.width / viewer.source.tileSize) - 1,
+            format: viewer.source.fileFormat,
+            rows: Math.ceil(viewer.source.height / viewer.source.tileSize) - 1,
+            z: viewer.source.maxLevel
+        };
+        n = config.cols;
+        x = [];
+        for (i = 0; i < n; i += 1) {
+            x[i] = config.base + config.z + '/' + i + '_0.' + config.format;
+        }
+        console.log(QM.box);
+        QM.start();
+        return QM.map(x.slice(-10), function (url) {
+         // This function needs documentation.
+            var x = QM.avar();
+            x.Q(function (evt) {
+             // This function needs documentation.
+                var temp = $.ajax({
+                    dataType: 'image/jpeg',
+                    error: evt.fail,
+                    success: function () {
+                     // This function needs documentation.
+                        x.val = temp.responseText.length;
+                        evt.exit();
+                        return this;
+                    },
+                 /*
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                 */
+                    url: url
+                });
+                return;
+            });
+            return x;
+        }, QM.box, {
+            '$': [
+                '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+            ]
+        }).on('error', function (err) {
+         // This function needs documentation.
+            console.error(err);
+            QM.stop();
+            return;
+        }).print();
+    };
 
     show_urls = function () {
      // This function needs documentation.
@@ -113,6 +166,7 @@
     global.OOGA = {
      // These are chiefly for debugging at the moment. The API will not be
      // set until the paper is submitted.
+        first_row_urls: first_row_urls,
         show_urls: show_urls,
         viewer: viewer
     };
