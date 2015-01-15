@@ -24,9 +24,22 @@
 
  // Declarations
 
-    var transform, viewer;
+    var show_urls, transform, viewer;
 
  // Definitions
+
+    show_urls = function () {
+     // This function needs documentation.
+        var base, cols, format, rows, z;
+        base = viewer.source.tilesUrl;
+        cols = Math.ceil(viewer.source.width / viewer.source.tileSize) - 1;
+        format = viewer.source.fileFormat;
+        rows = Math.ceil(viewer.source.height / viewer.source.tileSize) - 1;
+        z = viewer.source.maxLevel;
+        console.log(base + z + '/0_0.' + format);
+        console.log(base + z + '/' + cols + '_' + rows + '.' + format);
+        return;
+    };
 
     transform = function (evt) {
      // This function needs work because it's duplicating too much work. For
@@ -98,6 +111,9 @@
  // Out-of-scope definitions
 
     global.OOGA = {
+     // These are chiefly for debugging at the moment. The API will not be
+     // set until the paper is submitted.
+        show_urls: show_urls,
         viewer: viewer
     };
 
