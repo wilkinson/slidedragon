@@ -11,6 +11,11 @@
     <title>SlideDragon</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <base target="_blank">
+    <script>
+      if (location.protocol === 'https:') {
+          location.protocol = 'http:';
+      }
+    </script>
   </head>
   <body>
     <noscript>This page requires JavaScript.</noscript>
@@ -26,7 +31,7 @@
         <li><a href="http://peir-vm.path.uab.edu/wsi.php?slide=IPLab11Malaria">Visualization only</a></li>
       </ul>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://peir-vm.path.uab.edu/openseadragon/openseadragon.js"></script>
     <script src="https://www.qmachine.org/qm.js"></script>
     <script src="./ooga.js"></script>
